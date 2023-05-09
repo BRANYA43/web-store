@@ -4,7 +4,7 @@
 {% block content %}
   <div class="col-4"></div>
   <div class="col">
-    <form class="p-4 p-md-5 text-light" method="post">
+    <form class="p-4 p-md-5" method="post">
       {% csrf_token %}
       {{ form | crispy }}
       <div class="row">
