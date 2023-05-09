@@ -1,3 +1,34 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Category, SubCatalog, Catalog
+
+
+class CategoryInline(admin.TabularInline):
+    model = Category
+    fields = ('title',)
+    extra = 0
+    show_change_link = True
+
+
+class SubCatalogInline(admin.TabularInline):
+    model = SubCatalog
+    fields = ('title',)
+    extra = 0
+    show_change_link = True
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'catalog', 'sub_catalog')
+
+
+@admin.register(SubCatalog)
+class SubCatalogAdmin(admin.ModelAdmin):
+    list_display = ('title', 'parent')
+    inlines = (CategoryInline,)
+
+
+@admin.register(Catalog)
+class CatalogAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    inlines = (SubCatalogInline, CategoryInline)
