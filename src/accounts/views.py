@@ -1,9 +1,15 @@
 from django.contrib.auth import views as auth_views, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
 from accounts.forms import UserRegisterForm, UserContinueRegisterForm
+
+
+class PasswordChangeView(LoginRequiredMixin, auth_views.PasswordChangeView):
+    template_name = 'accounts/password/change_form.html'
+    success_url = reverse_lazy('home')
 
 
 class ContinueRegisterView(generic.UpdateView):
@@ -23,7 +29,7 @@ class RegisterView(generic.CreateView):
 
 
 class LoginView(auth_views.LoginView):
-    template_name = 'accounts/login.html'
+    template_name = 'accounts/login_form.html'
 
 
 class LogoutView(auth_views.LogoutView):

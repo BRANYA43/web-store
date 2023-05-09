@@ -36,7 +36,8 @@
               <i data-feather="user"></i>
             </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item" href="#">User Profile</a></li>
+              <li><a class="dropdown-item" href="#">Your Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:password_change' %}">Password change</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Log out</a></li>
             </ul>
