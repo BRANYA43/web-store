@@ -7,6 +7,17 @@ from django.views import generic
 from accounts.forms import UserRegisterForm, UserContinueRegisterForm
 
 
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = 'accounts/password/reset_confirm.html'
+    success_url = reverse_lazy('home')
+
+
+class PasswordResetView(auth_views.PasswordResetView):
+    template_name = 'accounts/password/reset_form.html'
+    email_template_name = 'accounts/password/reset_email.html'
+    success_url = reverse_lazy('accounts:password_reset_done')
+
+
 class PasswordChangeView(LoginRequiredMixin, auth_views.PasswordChangeView):
     template_name = 'accounts/password/change_form.html'
     success_url = reverse_lazy('home')
