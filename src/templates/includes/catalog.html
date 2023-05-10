@@ -1,0 +1,36 @@
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" >
+    Good Catalog
+  </a>
+  <ul class="dropdown-menu">
+    {% for catalog in catalogs %}
+      <li class="dropdown dropend">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+          {{ catalog.title }}
+        </a>
+        <ul class="dropdown-menu">
+          {% for sub in catalog.subs.all %}
+            <li class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ sub.title }}
+              </a>
+              <ul class="dropdown-menu">
+                {% for category in sub.categories.all %}
+                    <li><a class="dropdown-item" href="#">{{ category.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+            {% with catalog.categories.all as categories %}
+              {% if categories %}
+                <li><hr class="dropdown-divider"></li>
+                {% for category in catalog.categories.all %}
+                  <li><a class="dropdown-item" href="#">{{ category.title }}</a></li>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+</li>
