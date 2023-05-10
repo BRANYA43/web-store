@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from .forms import OrderedCategoryAndSubCatalogFormset, OrderedCatalogForm
 from .models import Category, SubCatalog, Catalog
 
 
@@ -8,6 +9,7 @@ class CategoryInline(admin.TabularInline):
     fields = ('title', 'order_num')
     extra = 0
     show_change_link = True
+    formset = OrderedCategoryAndSubCatalogFormset
 
 
 class SubCatalogInline(admin.TabularInline):
@@ -15,6 +17,7 @@ class SubCatalogInline(admin.TabularInline):
     fields = ('title', 'order_num')
     extra = 0
     show_change_link = True
+    formset = OrderedCategoryAndSubCatalogFormset
 
 
 @admin.register(Category)
@@ -32,3 +35,4 @@ class SubCatalogAdmin(admin.ModelAdmin):
 class CatalogAdmin(admin.ModelAdmin):
     list_display = ('title', 'order_num')
     inlines = (SubCatalogInline, CategoryInline)
+    form = OrderedCatalogForm
