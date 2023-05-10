@@ -18,7 +18,7 @@
               </a>
               <ul class="dropdown-menu">
                 {% for category in sub.categories.all|order_by:'order_num' %}
-                    <li><a class="dropdown-item" href="#">{{ category.title }}</a></li>
+                    <li><a class="dropdown-item" href="{% url 'goods:good_list' category.title %}">{{ category.title }}</a></li>
                 {% endfor %}
               </ul>
             </li>
@@ -27,7 +27,7 @@
               {% if categories %}
                 <li><hr class="dropdown-divider"></li>
                 {% for category in categories %}
-                  <li><a class="dropdown-item" href="#">{{ category.title }}</a></li>
+                  <li><a class="dropdown-item" href="{% url 'goods:good_list' category.title %}">{{ category.title }}</a></li>
                 {% endfor %}
               {% endif %}
             {% endwith %}

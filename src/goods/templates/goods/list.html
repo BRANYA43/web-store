@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Good List{% endblock %}
+{% block content %}
+  <div class="text-center pt-3 pb-3 text-warning"><h2>Category: {{ category }}</h2></div>
+  <div class="col-4 border rounded">Filter Tab</div>
+  <div class="col">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for good in goods %}
+        <div class="col">
+          <div class="card">
+            <img src="{{ good.image.url }}" class="card-img-top" alt="{{ good.slug }}">
+            <div class="card-body">
+              <a class="link-underline link-underline-opacity-0 link-warning" href="#"><h5 class="card-title">{{ good.title }}</h5></a>
+                {% if good.quantity > 0 %}
+                  <p class="card-text text-success">In Stock</p>
+                  <p class="card-text">Price: {{ good.price }} UAH</p>
+                  <button class="btn btn-warning" type="button">Add to Cart</button>
+                {% else %}
+                  <p class="card-text text-secondary-emphasis">Out of Stock</p>
+                  <p class="card-text text-secondary-emphasis">Price: {{ good.price }} UAH</p>
+                  <button class="btn btn-warning disabled" type="button">Add to Cart</button>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% include 'includes/paginator.html' %}
+  </div>
+{% endblock %}

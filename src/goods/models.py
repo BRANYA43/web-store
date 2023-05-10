@@ -44,7 +44,7 @@ class Good(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, unique=True, db_index=True)
     category = models.ForeignKey(to=Category, on_delete=models.SET_NULL, related_name='goods', null=True, blank=True)
-    image = models.ImageField(upload_to='goods/', default='../no-image.png')
+    image = models.ImageField(upload_to='goods/', default='no-image.png')
     short_description = models.TextField(max_length=500, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     quantity = models.PositiveIntegerField(default=1)
