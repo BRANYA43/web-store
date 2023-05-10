@@ -5,14 +5,14 @@ from .models import Category, SubCatalog, Catalog
 
 class CategoryInline(admin.TabularInline):
     model = Category
-    fields = ('title',)
+    fields = ('title', 'order_num')
     extra = 0
     show_change_link = True
 
 
 class SubCatalogInline(admin.TabularInline):
     model = SubCatalog
-    fields = ('title',)
+    fields = ('title', 'order_num')
     extra = 0
     show_change_link = True
 
@@ -30,5 +30,5 @@ class SubCatalogAdmin(admin.ModelAdmin):
 
 @admin.register(Catalog)
 class CatalogAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'order_num')
     inlines = (SubCatalogInline, CategoryInline)
