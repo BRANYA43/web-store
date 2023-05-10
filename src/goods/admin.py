@@ -1,7 +1,23 @@
 from django.contrib import admin
 
 from .forms import OrderedCategoryAndSubCatalogFormset, OrderedCatalogForm
-from .models import Category, SubCatalog, Catalog
+from .models import Category, SubCatalog, Catalog, Good
+
+
+class GoodInline(admin.TabularInline):
+    model = Good
+    fields = ('title', 'slug', 'quantity', 'price', 'is_show')
+    prepopulated_fields = {'slug': ('title',)}
+    extra = 0
+    show_change_link = True
+
+
+@admin.register(Good)
+class GoodAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'quantity', 'price', 'updated')
+    prepopulated_fields = {'slug': ('title',)}
+    list_filter = ('is_show', 'category')
+    readonly_fields = ('created', 'updated')
 
 
 class CategoryInline(admin.TabularInline):
@@ -23,6 +39,7 @@ class SubCatalogInline(admin.TabularInline):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'catalog', 'sub_catalog')
+    inlines = (GoodInline,)
 
 
 @admin.register(SubCatalog)
