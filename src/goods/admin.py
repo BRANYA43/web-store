@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .forms import OrderedCategoryAndSubCatalogFormset, OrderedCatalogForm
+from .forms import OrderedCheckFormset, OrderedCatalogCheckForm, CategoryCatalogCheckForm
 from .models import Category, SubCatalog, Catalog, Good
 
 
@@ -25,7 +25,7 @@ class CategoryInline(admin.TabularInline):
     fields = ('title', 'order_num')
     extra = 0
     show_change_link = True
-    formset = OrderedCategoryAndSubCatalogFormset
+    formset = OrderedCheckFormset
 
 
 class SubCatalogInline(admin.TabularInline):
@@ -33,13 +33,14 @@ class SubCatalogInline(admin.TabularInline):
     fields = ('title', 'order_num')
     extra = 0
     show_change_link = True
-    formset = OrderedCategoryAndSubCatalogFormset
+    formset = OrderedCheckFormset
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'catalog', 'sub_catalog')
     inlines = (GoodInline,)
+    form = CategoryCatalogCheckForm
 
 
 @admin.register(SubCatalog)
@@ -52,4 +53,4 @@ class SubCatalogAdmin(admin.ModelAdmin):
 class CatalogAdmin(admin.ModelAdmin):
     list_display = ('title', 'order_num')
     inlines = (SubCatalogInline, CategoryInline)
-    form = OrderedCatalogForm
+    form = OrderedCatalogCheckForm
