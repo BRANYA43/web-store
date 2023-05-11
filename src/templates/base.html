@@ -11,9 +11,14 @@
   </head>
   <body data-bs-theme="dark">
     <div class="container">
-      {% include 'includes/navbar.html' %}
+      <div class="pb-4">
+        {% include 'includes/navbar.html' %}
+      </div>
       <div class="row">
         {% block content %}{% endblock %}
+      </div>
+      <div class="pt-5">
+        {% include 'includes/footer.html' %}
       </div>
     </div>
   </body>
