@@ -9,7 +9,7 @@ class GoodListView(generic.ListView):
     model = Good
     template_name = 'goods/list.html'
     context_object_name = 'goods'
-    paginate_by = 1
+    paginate_by = 12
 
     def get_queryset(self):
         return self.model.objects.filter(is_show=True, category__title=self.kwargs['category'])

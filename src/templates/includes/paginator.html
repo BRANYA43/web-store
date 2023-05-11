@@ -14,6 +14,8 @@
         <li class="page-item"><a class="page-link active">{{ page_num }}</a></li>
       {% elif page_num > page_obj.number|add:-3 and page_num < page_obj.number|add:3 %}
         <li class="page-item"><a class="page-link" href="?page={{ page_num }}{{ params }}">{{ page_num }}</a></li>
+      {% elif page_num > 3 and page_num < 6 or page_num > paginator.num_pages|add:-5 and page_num < paginator.num_pages|add:-3%}
+        <li class="page-item"><a class="page-link" href="?page={{ page_num }}{{ params }}">{{ page_num }}</a></li>
       {% endif %}
     {% endfor %}
     <li class="page-item">
