@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
+
+from carts.admin import CartInline
 
 
 @admin.register(get_user_model())
@@ -13,4 +14,5 @@ class UserAdmin(admin.ModelAdmin):
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
     readonly_fields = ('last_login', 'date_joined', 'is_active')
+    inlines = (CartInline, )
 
