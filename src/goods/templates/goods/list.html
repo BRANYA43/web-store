@@ -8,9 +8,13 @@
       {% for good in goods %}
         <div class="col">
           <div class="card">
-            <img src="{{ good.image.url }}" class="card-img-top" alt="{{ good.slug }}">
+            <a href="{% url 'goods:good_detail' good.slug %}">
+              <img src="{{ good.image.url }}" class="card-img-top" alt="{{ good.slug }}">
+            </a>
             <div class="card-body">
-              <a class="link-underline link-underline-opacity-0 link-warning" href="#"><h5 class="card-title">{{ good.title }}</h5></a>
+              <a class="link-underline link-underline-opacity-0 link-warning" href="{% url 'goods:good_detail' good.slug %}">
+                <h5 class="card-title">{{ good.title }}</h5>
+              </a>
                 {% if good.quantity > 0 %}
                   <p class="card-text text-success">In Stock</p>
                   <p class="card-text">Price: {{ good.price }} UAH</p>

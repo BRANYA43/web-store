@@ -5,6 +5,13 @@ from django.views import generic
 from .models import Good
 
 
+class GoodDetailView(generic.DetailView):
+    model = Good
+    template_name = 'goods/detail.html'
+    context_object_name = 'good'
+    slug_url_kwarg = 'good'
+
+
 class GoodListView(generic.ListView):
     model = Good
     template_name = 'goods/list.html'
