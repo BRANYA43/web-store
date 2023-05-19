@@ -14,4 +14,4 @@ class CartItemForm(forms.ModelForm):
         }
 
 
-CartItemFormSet = modelformset_factory(CartItem, CartItemForm, extra=0)
+CartItemFormSet = modelformset_factory(CartItem, CartItemForm, extra=0, can_delete=True)
