@@ -1,10 +1,23 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.decorators.http import require_GET
 
 from carts.forms import CartItemFormSet
 from carts.models import CartItem
+from goods.models import Good
+
+
+@login_required
+@require_GET
+def add_cart_item(request, *args, **kwargs):
+    cart = request.user.cart
+    good = Good.objects.get(slug=kwargs['good'])
+    item = CartItem.objects.create(cart=cart, good=good)
+    item.save()
+    return redirect(reverse_lazy('carts:cart'))
 
 
 class CartView(LoginRequiredMixin, generic.ListView):
@@ -23,10 +36,7 @@ class CartView(LoginRequiredMixin, generic.ListView):
 
     def post(self, request, *args, **kwargs):
         formset = self.formset(request.POST)
-        print(request.POST)
-        print('pre save')
         if formset.is_valid():
-            print('save')
             formset.save()
         return redirect(reverse_lazy('carts:cart'))
 

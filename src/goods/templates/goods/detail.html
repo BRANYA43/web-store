@@ -21,7 +21,7 @@
       {% if good.quantity > 0 %}
       <p class="text-success">In stock</p>
       <p>Price: {{ good.price }} UAH</p>
-      <button class="btn btn-warning">Add to Cart</button>
+      <a class="btn btn-warning" href="{% url 'carts:add_item' good.slug %}">Add to Cart</a>
     {% else %}
       <p class="text-secondary-emphasis">Out of stock</p>
       <p>Price: {{ good.price }} UAH</p>
