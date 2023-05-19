@@ -4,27 +4,34 @@
 {% block content %}
   <div class="col-8">
     <h2>Cart</h2>
-      {% for item in items %}
-      {% if items %}
+    <form method="post">
+      {% csrf_token %}
+      {{ formset.management_form }}
+      {% for form in formset %}
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="{{ item.good.image.url }}" alt="{{ item.good.slug }}" class="img-fluid">
+              <img src="{{ form.instance.good.image.url }}" alt="{{ form.instance.good.slug }}" class="img-fluid">
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">{{ item.good.title }}</h5>
-                <p class="card-text">Price: {{ item.good.price }} UAH</p>
-                <p class="card-text">Quantity: {{ item.quantity }}</p>
-                <p class="card-text">Total: {{ item.get_total }} UAH</p>
+                <h5 class="card-title">{{ form.instance.good.title }}</h5>
+                <div class="row">
+                  <div class="col-3">
+                    <p class="card-text">{{ form|crispy }}</p>
+                    <button class="btn btn-warning" type="submit">Save</button>
+                  </div>
+                </div>
+                <p class="card-text">Price: {{ form.instance.good.price }} UAH</p>
+                <p class="card-text">Total: {{ form.instance.get_total }} UAH</p>
               </div>
             </div>
           </div>
         </div>
-        {% else %}
-          <p>You haven't chosen any goods yet.</p>
-        {% endif %}
+      {% empty %}
+        <p>You haven't chosen any goods yet.</p>
       {% endfor %}
+    </form>
   </div>
   <div class="col-md-4">
     <div class="card">
