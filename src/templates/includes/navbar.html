@@ -17,7 +17,7 @@
       </form>
       <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#"><i data-feather="shopping-cart"></i></a>
+            <a class="nav-link" href="{% url 'carts:cart' %}"><i data-feather="shopping-cart"></i></a>
           </li>
         {% if user.is_authenticated %}
           <li class="nav-item dropdown">
