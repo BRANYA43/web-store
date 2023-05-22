@@ -13,7 +13,6 @@ class Cart(models.Model):
         return self.user.username
 
     def get_total(self):
-
         return sum(item.get_total() for item in self.items.all())
 
     def get_quantity(self):

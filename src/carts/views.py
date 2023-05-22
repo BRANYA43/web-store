@@ -32,6 +32,7 @@ class CartView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['formset'] = self.formset(queryset=self.get_queryset())
+        context['cart'] = self.request.user.cart
         return context
 
     def post(self, request, *args, **kwargs):

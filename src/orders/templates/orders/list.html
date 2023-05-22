@@ -5,7 +5,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Order UUID</th>
+        <th>UUID</th>
         <th>Date</th>
         <th>Paid</th>
         <th>Total Price</th>
@@ -15,9 +15,9 @@
       {% for order in orders %}
         <tr>
           <td>{{ order.uuid }}</td>
-          <td>{{ order.create }}</td>
+          <td>{{ order.created }}</td>
           <td>{% if order.is_paid %}Yes{% else %}No{% endif %}</td>
-          <td>{{ order.total_price }} UAH</td>
+          <td>{{ order.get_total }} UAH</td>
         </tr>
       {% empty %}
         <tr>

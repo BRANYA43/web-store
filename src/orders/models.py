@@ -14,7 +14,10 @@ class Order(models.Model):
         ordering = ('created', '-is_paid')
 
     def __str__(self):
-        return self.uuid
+        return str(self.uuid)
+
+    def get_total(self):
+        return sum(item.get_total() for item in self.items.all())
 
 
 class OrderItem(models.Model):
@@ -29,3 +32,6 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_total(self):
+        return self.quantity * self.price

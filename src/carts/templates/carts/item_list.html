@@ -35,9 +35,13 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Cart Summary</h5>
-        <p class="card-text">Total Items: {{ cart_items.count }}</p>
-        <p class="card-text">Total Price: {{ total_price }} UAH</p>
-        <a href="#" class="btn btn-primary">Checkout</a>
+        <p class="card-text">Total Items: {{ cart.get_quantity }}</p>
+        <p class="card-text">Total Price: {{ cart.get_total }} UAH</p>
+        {% if cart.get_quantity %}
+        <a href="{% url 'orders:checkout' %}" class="btn btn-warning">Checkout</a>
+        {% else %}
+        <a href="{% url 'orders:checkout' %}" class="btn btn-warning disabled">Checkout</a>
+        {% endif %}
       </div>
     </div>
   </div>
