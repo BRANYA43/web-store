@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Order History{% endblock %}
+{% block content %}
+  <h2>Order History</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Order UUID</th>
+        <th>Date</th>
+        <th>Paid</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+        <tr>
+          <td>{{ order.uuid }}</td>
+          <td>{{ order.create }}</td>
+          <td>{% if order.is_paid %}Yes{% else %}No{% endif %}</td>
+          <td>{{ order.total_price }} UAH</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">No orders found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
