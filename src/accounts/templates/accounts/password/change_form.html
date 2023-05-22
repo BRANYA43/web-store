@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block title %}Password change{% endblock %}
+{% block content %}
+  <div class="col-4"></div>
+  <div class="col">
+    <form class="p-4 p-md-5 " method="post">
+      {% csrf_token %}
+      <h2 class="mb-4 text-center">Password change</h2>
+      <div class="form-floating mb-3">
+        {{ form | crispy }}
+      </div>
+      <button class="w-100 btn btn-lg btn-warning" type="submit">Change</button>
+    </form>
+  </div>
+  <div class="col-4"></div>
+{% endblock %}
