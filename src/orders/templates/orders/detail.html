@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Order Detail{% endblock %}
+{% block content %}
+  <h2>Order Detail</h2>
+  <h4>UUID: {{ order.uuid }}</h4>
+  <p>User: {{ order.user }}</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in order.items.all %}
+        <tr>
+          <td>{{ item.title }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price }} UAH</td>
+          <td>{{ item.get_total }} UAH</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p>Total Price: {{ order.get_total }} UAH</p>
+  <p>Date: {{ order.created }}</p>
+{% endblock %}

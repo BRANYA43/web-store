@@ -14,7 +14,7 @@
     <tbody>
       {% for order in orders %}
         <tr>
-          <td>{{ order.uuid }}</td>
+          <td><a href="{% url 'orders:detail' order.uuid %}">{{ order.uuid }}</a></td>
           <td>{{ order.created }}</td>
           <td>{% if order.is_paid %}Yes{% else %}No{% endif %}</td>
           <td>{{ order.get_total }} UAH</td>

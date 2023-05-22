@@ -8,13 +8,21 @@ from django.views.decorators.http import require_GET
 from orders.models import Order, OrderItem
 
 
+class OrderDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Order
+    template_name = 'orders/detail.html'
+    context_object_name = 'order'
+
+    def get_object(self, queryset=None):
+        return self.model.objects.get(uuid=self.kwargs['uuid'])
+
+
 @login_required
 @require_GET
 def checkout_order(request, *args, **kwargs):
     cart = request.user.cart
     order = Order.objects.create(user=request.user)
     order.save()
-    print(order)
     for cart_item in cart.items.all():
         order_item = OrderItem.objects.create(
             order=order,
